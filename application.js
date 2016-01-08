@@ -3,7 +3,8 @@
 $(document).ready(function(){
   getIP()
   $(document).click(getClicksPerSession)
-  $(window).unload(sendUser)
+  // $(window).unload(sendUser)
+  $(window).bind('beforeunload', sendUser)
 })
 
 function getIP(){
@@ -21,15 +22,16 @@ function getClicksPerSession(e){
 
 
 function sendUser(e){
+  e.preventDefault()
   user.leave = new Date
   user.destination = $(e.target).attr("href")
   $.ajax({
-    url: "http://localhost:3000",
+    url: "http://localhost:3000/users/1/projects/1",
     data: user,
     method: "post"
   }).done(function(){
     console.log("done")
-  }).fail(function(){
-    console.log("fail")
+  }).fail(function(e){
+    console.log(e)
   })
 }
