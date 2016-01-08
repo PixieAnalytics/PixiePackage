@@ -12,15 +12,14 @@ function getIP(){
   $.get("http://ipinfo.io", function(response) {
     user = response;
     user.arrival = new Date
-    user.clicks = {}
+    user.clicks = 0
     user.domain = "test"
     // now = getTime()
   }, "jsonp");
 }
 
 function getClicksPerSession(e){
-  user.clicks[e.target.innerHTML.split(" ")[0]]= new Date - user.arrival
-}
+  user.clicks += 1
 
 function addDestination(){
   user.destination = $(this).attr("href")
