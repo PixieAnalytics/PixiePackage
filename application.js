@@ -20,6 +20,7 @@ function getIP(){
 
 function getClicksPerSession(e){
   user.clicks += 1
+}
 
 function addDestination(){
   user.destination = $(this).attr("href")
