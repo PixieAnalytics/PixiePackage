@@ -4,6 +4,7 @@ $(document).ready(function(){
   getIP()
   $(document).click(getClicksPerSession)
   // $(window).unload(sendUser)
+  $('a').click(addDestination)
   $(window).bind('beforeunload', sendUser)
 })
 
@@ -21,17 +22,19 @@ function getClicksPerSession(e){
   user.clicks[e.target.innerHTML.split(" ")[0]]= new Date - user.arrival
 }
 
+function addDestination(){
+  user.destination = $(this).attr("href")
+}
 
 function sendUser(e){
   e.preventDefault()
   user.leave = new Date
-  user.destination = $(e.target).attr("href")
   $.ajax({
     type: "POST",
     url: "http://localhost:3000/visitors/manage",
     data: user,
   }).done(function(){
-    console.log("done")
+    console.log(user.destination)
   }).fail(function(e){
     console.log(e)
   })
