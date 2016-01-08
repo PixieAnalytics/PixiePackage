@@ -12,6 +12,7 @@ function getIP(){
     user = response;
     user.arrival = new Date
     user.clicks = {}
+    user.domain = "test"
     // now = getTime()
   }, "jsonp");
 }
@@ -26,9 +27,9 @@ function sendUser(e){
   user.leave = new Date
   user.destination = $(e.target).attr("href")
   $.ajax({
-    url: "http://localhost:3000/users/1/projects/1",
+    type: "POST",
+    url: "http://localhost:3000/visitors/manage",
     data: user,
-    method: "post"
   }).done(function(){
     console.log("done")
   }).fail(function(e){
