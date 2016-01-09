@@ -13,7 +13,7 @@ function getIP(){
     user = response;
     user.arrival = new Date
     user.clicks = 0
-    user.domain = "test"
+    user.domain = domain
     // now = getTime()
   }, "jsonp");
 }
@@ -31,7 +31,7 @@ function sendUser(e){
   user.leave = new Date
   $.ajax({
     type: "POST",
-    url: "http://localhost:3000/visitors/manage",
+    url: "http://pixiereport.herokuapp.com/visitors/manage",
     data: user,
   }).done(function(){
     console.log(user.destination)
