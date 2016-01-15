@@ -9,17 +9,27 @@ $(document).ready(function(){
 })
 
 function getIP(){
-  $.get("http://ipinfo.io", function(response) {
-    user = response;
+  $.ajax({
+    url: "https://freegeoip.net/json/",
+    type: "post",
+    dataType: "jsonp"
+  })
+  .done(function(response){
+    user=response
     user.arrival = new Date
     user.clicks = 0
+    user.heatmap = []
     user.domain = domain
-    // now = getTime()
-  }, "jsonp");
+  })
+}
+
+function clickLocation(e){
+  return {x: e.pageX, y: e.pageY}
 }
 
 function getClicksPerSession(e){
-  user.clicks += 1
+  user.heatmap.push(clickLocation(e))
+  user.clicks +=1
 }
 
 function addDestination(){
