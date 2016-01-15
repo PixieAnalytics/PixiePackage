@@ -9,13 +9,18 @@ $(document).ready(function(){
 })
 
 function getIP(){
-  $.get("http://ipinfo.io", function(response) {
-    user = response;
+  $.ajax({
+    url: "https://freegeoip.net/json/",
+    type: "post",
+    dataType: "jsonp"
+  })
+  .done(function(response){
+    console.log(response)
+    user=response
     user.arrival = new Date
     user.clicks = 0
     user.domain = domain
-    // now = getTime()
-  }, "jsonp");
+  })
 }
 
 function getClicksPerSession(e){
