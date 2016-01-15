@@ -15,16 +15,21 @@ function getIP(){
     dataType: "jsonp"
   })
   .done(function(response){
-    console.log(response)
     user=response
     user.arrival = new Date
     user.clicks = 0
+    user.heatmap = []
     user.domain = domain
   })
 }
 
+function clickLocation(e){
+  return {x: e.pageX, y: e.pageY}
+}
+
 function getClicksPerSession(e){
-  user.clicks += 1
+  user.heatmap.push(clickLocation(e))
+  user.clicks +=1
 }
 
 function addDestination(){
